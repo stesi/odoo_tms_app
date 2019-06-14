@@ -1,0 +1,7 @@
+{
+  "name": "odoo_tms",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
