@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Accounts
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerDirection]="'root'" [routerLink]="['/create-account']" >
+        <ion-icon name="add" ></ion-icon>
+      </ion-button >
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item  (dblclick)="dblClickAccount(account.id)" *ngFor="let account of accounts$ | async">
+      <div class="item-note" slot="start">
+        {{account.username}}
+      </div>
+
+      <div class="item-note" slot="end">
+        {{account.createDate}}
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

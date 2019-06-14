@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-
+import 'reflect-metadata';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { createConnection } from 'typeorm';
+import { Accounts } from '../entities/Accounts';
+import {RestService} from '../services/RestService';
+import {HttpClientModule} from '@angular/common/http';
+import { Utils } from '../services/utils';
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  providers: [RestService, HttpClientModule, Utils]
 })
 export class AppComponent {
   public appPages = [
@@ -16,8 +21,8 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
+      title: 'Accounts',
+      url: '/accounts',
       icon: 'list'
     }
   ];
@@ -35,5 +40,20 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.platform.ready().then(async () => {
+      // Running on device or emulator
+      await createConnection({
+        type: 'cordova',
+        database: 'test',
+        location: 'default',
+        logging: ['error', 'query', 'schema'],
+        synchronize: true,
+        entities: [
+          Accounts
+        ],
+      });
+    });
+
+
   }
 }

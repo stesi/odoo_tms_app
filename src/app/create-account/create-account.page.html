@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Create account
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  (ngSubmit)="submitCreate()">
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input  type="text" [(ngModel)]="account.username" name="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input  type="password" [(ngModel)]="account.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>URL</ion-label>
+      <ion-input  type="text" [(ngModel)]="account.url" name="url"></ion-input>
+    </ion-item>
+    <ion-button color="primary" type="submit"expand="full">Salva</ion-button>
+
+  </form>
+</ion-content>
