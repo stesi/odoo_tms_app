@@ -1,25 +1,29 @@
-import {Entity, Column, PrimaryColumn} from "typeorm";
+import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn} from 'typeorm';
+import Trips from './Trips';
 
 @Entity()
-export class Accounts {
+export default class Accounts extends BaseEntity {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: true })
+    @Column({nullable: true})
     username: string;
 
-    @Column({ nullable: true })
+    @Column({nullable: true})
     password: string;
 
-    @Column({ nullable: true })
+    @Column({nullable: true})
     url: string;
-    @Column({ nullable: true })
+    @Column({nullable: true})
     accessToken: string;
-    @Column({ nullable: true })
+    @Column({nullable: true})
     lastUpdate: Date;
-    @Column({ nullable: true })
+    @Column({nullable: true})
     createDate: Date;
-    @Column({ nullable: true })
-    valid: boolean  ;
+    @Column({nullable: true})
+    valid: boolean;
+
+    @OneToMany((type) => Trips, (trip) => trip.accountId)
+    trips: Trips[];
 }

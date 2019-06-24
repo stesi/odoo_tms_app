@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {getConnection} from 'typeorm';
-import {Accounts} from '../../entities/Accounts';
+import Accounts from '../../entities/Accounts';
 import {NavController} from '@ionic/angular';
 import {RestService} from '../../services/RestService';
 import {Utils} from '../../services/utils';

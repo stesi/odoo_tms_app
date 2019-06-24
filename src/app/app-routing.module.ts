@@ -13,7 +13,8 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   { path: 'accounts', loadChildren: './accounts/accounts.module#AccountsPageModule' },
-  { path: 'create-account', loadChildren: './create-account/create-account.module#CreateAccountPageModule' }
+  { path: 'create-account', loadChildren: './create-account/create-account.module#CreateAccountPageModule' },
+  { path: 'trips', loadChildren: './trips/trips.module#TripsPageModule' }
 ];
 
 @NgModule({

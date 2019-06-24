@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Accounts} from '../../entities/Accounts';
+import Accounts from '../../entities/Accounts';
 import {getConnection} from 'typeorm';
 import {from, Observable} from 'rxjs';
+import {RestService} from '../../services/RestService';
 
 @Component({
     selector: 'app-accounts',
@@ -11,7 +12,7 @@ import {from, Observable} from 'rxjs';
 export class AccountsPage implements OnInit {
     accounts$: Observable<Accounts[]>;
 
-    constructor() {
+    constructor(private restClient: RestService) {
     }
 
     getAccounts(): Observable<Accounts[]> {
@@ -21,6 +22,15 @@ export class AccountsPage implements OnInit {
             .createQueryBuilder('accounts')
             .getMany());
     }
+
+    clickAccount(id) {
+
+
+        this.restClient.syncAccount(id);
+    }
+
+    //(dblclick)="dblClickAccount(account.id)"
+
 
     dblClickAccount(id) {
         getConnection()

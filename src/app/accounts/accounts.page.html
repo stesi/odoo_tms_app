@@ -16,7 +16,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item  (dblclick)="dblClickAccount(account.id)" *ngFor="let account of accounts$ | async">
+    <ion-item  (click)="clickAccount(account.id)" *ngFor="let account of accounts$ | async">
       <div class="item-note" slot="start">
         {{account.username}}
       </div>
