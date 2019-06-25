@@ -1,36 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>trips</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>trips</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card  *ngFor="let item of items">
-    <ion-card-header>
-      <ion-card-title>My Neighbor Totoro</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <app-expandable expandHeight="100px" [expanded]="item.expanded">
-        <p>
-          Hello there.
-        </p>
-        <p>
-          Hello there.
-        </p>
-        <p>
-          Hello there.
-        </p>
-        <p>
-          Hello there.
-        </p>
-        <p>
-          Hello there.
-        </p>
-        <p>
-          Hello there.
-        </p>
-      </app-expandable>
-    </ion-card-content>
-  </ion-card>
+    <accordion>
+        <group *ngFor="let trip of trips$ | async">
+            <span class="accordion-title">First Grou</span>
+            <span class="accordion-content"> this is the content</span>
+        </group>
+    </accordion>
 </ion-content>

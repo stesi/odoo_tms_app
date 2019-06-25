@@ -1,4 +1,5 @@
 import {Component, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, Output, EventEmitter} from '@angular/core';
+import { HostListener  } from "@angular/core";
 
 @Component({
     selector: 'app-expandable',
@@ -12,12 +13,11 @@ export class ExpandableComponent implements AfterViewInit {
     @Output() clickedElem = new EventEmitter()
     constructor(public renderer: Renderer2) {
     }
-
+    @HostListener('click', ['$event'])
     expandItem(item) {
-        console.log(item)
-        this.clickedElem.emit()
-        item.expanded = !item.expanded;
+       alert(1);
     }
+
 
     ngAfterViewInit() {
         this.renderer.setStyle(this.expandWrapper.nativeElement, 'max-height', this.expandHeight);

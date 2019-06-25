@@ -7,6 +7,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {TripsPage} from './trips.page';
 import {ExpandableComponent} from '../components/expandable/expandable.component';
+import {AccordionComponent} from '../components/accordion/accordion.component';
+import {AccordionGroupComponent} from '../components/accordion/accordion-group.component';
 
 const routes: Routes = [
     {
@@ -23,7 +25,7 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        ExpandableComponent,TripsPage]
+        AccordionComponent, AccordionGroupComponent, TripsPage]
 })
 export class TripsPageModule {
 }

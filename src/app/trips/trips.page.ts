@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {from, Observable} from 'rxjs';
+import Accounts from '../../entities/Accounts';
+import {getConnection} from 'typeorm';
+import Trips from '../../entities/Trips';
 
 @Component({
-  selector: 'app-trips',
-  templateUrl: './trips.page.html',
-  styleUrls: ['./trips.page.scss'],
+    selector: 'app-trips',
+    templateUrl: './trips.page.html',
+    styleUrls: ['./trips.page.scss'],
 })
 export class TripsPage implements OnInit {
-  public items: any = [];
+    public trips$: Observable<Trips[]>;
 
-  constructor() {
-    this.items = [
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false }
-    ];
-  }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    getTrips(): Observable<Trips[]> {
+
+        return from(getConnection()
+            .getRepository(Trips)
+            .createQueryBuilder('trips')
+            .getMany());
+    }
+
+    ngOnInit() {
+    }
 
 }
