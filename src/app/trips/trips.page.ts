@@ -24,6 +24,7 @@ export class TripsPage implements OnInit {
     }
 
     ngOnInit() {
+        this.trips$ = this.getTrips();
     }
 
 }

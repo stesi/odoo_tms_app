@@ -1,10 +1,12 @@
 /* tslint:disable:no-trailing-whitespace */
-import {Entity, Column, PrimaryColumn, ManyToOne, BaseEntity, PrimaryGeneratedColumn, Index} from 'typeorm';
+import {Entity, Column, PrimaryColumn, ManyToOne, BaseEntity, PrimaryGeneratedColumn, Index, OneToMany} from 'typeorm';
 import Accounts from './Accounts';
+import Stops from './Stops';
 
 @Entity()
-@Index([ 'externalId', 'accountId'], { unique: true })
-export default class Trips extends  BaseEntity {
+@Index(['externalId', 'accountId'], {unique: true})
+export default class Trips extends BaseEntity {
+
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,13 +21,16 @@ export default class Trips extends  BaseEntity {
     tripType: string;
 
     @Column({nullable: true})
-    from: string;
+    fromAddress: string;
     @Column({nullable: true})
-    to: string;
+    toAddress: string;
     @Column({nullable: true})
     startDate: Date;
     @Column({nullable: true})
     endDate: Date;
+
+    @OneToMany((type) => Stops, (stop) => stop.tripId)
+    stops: Stops[];
 
     @ManyToOne((type) => Accounts, (account) => account.trips)
     accountId: Accounts;

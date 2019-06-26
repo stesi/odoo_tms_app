@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Utils} from '../services/utils';
 import {DataProvider} from '../services/DataProvider';
 import Trips from '../entities/Trips';
+import Stops from '../entities/Stops';
 
 @Component({
     selector: 'app-root',
@@ -58,7 +59,8 @@ export class AppComponent {
                 synchronize: true,
                 entities: [
                     Trips,
-                    Accounts
+                    Accounts,
+                    Stops
 
                 ],
             });
