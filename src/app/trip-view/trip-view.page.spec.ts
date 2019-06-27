@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExpandableComponent } from './expandable.component';
+import { TripViewPage } from './trip-view.page';
 
-describe('ExpandableComponent', () => {
-  let component: ExpandableComponent;
-  let fixture: ComponentFixture<ExpandableComponent>;
+describe('TripViewPage', () => {
+  let component: TripViewPage;
+  let fixture: ComponentFixture<TripViewPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExpandableComponent ],
+      declarations: [ TripViewPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExpandableComponent);
+    fixture = TestBed.createComponent(TripViewPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

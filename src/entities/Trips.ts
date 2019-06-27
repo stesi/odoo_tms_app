@@ -1,5 +1,16 @@
 /* tslint:disable:no-trailing-whitespace */
-import {Entity, Column, PrimaryColumn, ManyToOne, BaseEntity, PrimaryGeneratedColumn, Index, OneToMany} from 'typeorm';
+import {
+    Entity,
+    Column,
+    PrimaryColumn,
+    ManyToOne,
+    BaseEntity,
+    PrimaryGeneratedColumn,
+    Index,
+    OneToMany,
+    Generated,
+    JoinColumn
+} from 'typeorm';
 import Accounts from './Accounts';
 import Stops from './Stops';
 
@@ -8,10 +19,8 @@ import Stops from './Stops';
 export default class Trips extends BaseEntity {
 
 
-    @PrimaryGeneratedColumn()
-    id: number;
 
-    @Column({nullable: true})
+    @PrimaryColumn()
     externalId: number;
 
     @Column({nullable: true})
@@ -29,9 +38,13 @@ export default class Trips extends BaseEntity {
     @Column({nullable: true})
     endDate: Date;
 
-    @OneToMany((type) => Stops, (stop) => stop.tripId)
+    @OneToMany((type) => Stops, (stop) => stop.trip, {
+        eager: true
+    })
     stops: Stops[];
-
-    @ManyToOne((type) => Accounts, (account) => account.trips)
-    accountId: Accounts;
+    @PrimaryColumn()
+    accountId: number;
+    @ManyToOne((type) => Accounts, (account) => account.trips )
+    @JoinColumn({name: 'accountId'})
+    account: Accounts;
 }

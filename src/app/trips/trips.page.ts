@@ -23,6 +23,9 @@ export class TripsPage implements OnInit {
             .getMany());
     }
 
+    tripView(id) {
+    }
+
     ngOnInit() {
         this.trips$ = this.getTrips();
     }

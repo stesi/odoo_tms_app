@@ -4,6 +4,7 @@ import {getConnection} from 'typeorm';
 import Accounts from '../entities/Accounts';
 import {forEach} from '@angular-devkit/schematics';
 import Trips from '../entities/Trips';
+import Stops from '../entities/Stops';
 
 
 @Injectable()
@@ -42,20 +43,37 @@ export class RestService {
 
     public syncData(accountId: Accounts) {
         let connection = getConnection();
-        return this.doCall(accountId.url, '/gtms/get', {}, accountId.accessToken).then((result: any) => {
-            let repository = connection.getRepository(Trips);
-            for (let trip   of result.result.data) {
+        return this.doCall(accountId.url, '/gtms/get', {accountId: accountId.id}, accountId.accessToken).then(async (result: any) => {
+            let repositoryTrips = connection.getRepository(Trips);
+            let repositoryStops = connection.getRepository(Stops);
+            for (let trip   of result.result.data.trips) {
                 var item: any;
-                trip.accountId = accountId;
-                const conditions = {accountId: accountId, externalId: trip.externalId};
-                const tripDb = repository.findOne(conditions).then((out: any) => {
-                    if (out === undefined) {
-                        item = repository.insert(trip);
-                    } else {
-                        item = repository.update(conditions, trip);
+                await repositoryTrips.save(trip);
+                // trip.accountId.id = accountId.id;
+                // const conditions = {accountId: accountId.id, externalId: trip.externalId};
+                // const tripDb = repositoryTrips.findOne(conditions).then(async (out: any) => {
+                //     if (out === undefined) {
+                //         item = await repositoryTrips.insert(trip);
+                //     } else {
+                //         item = await repositoryTrips.update(conditions, trip);
+                //
+                //     }
+                //     // const id = trip.id;
+                //     // const stops = trip.stops;
+                //     // for(let stop of stops) {
+                //     //     const conditions = {accountId: accountId.id, externalId: stop.externalId};
+                //     //     const stopDb = await repositoryStops.findOne(conditions);
+                //     //     if (stopDb === undefined) {
+                //     //         stop.tripId = trip;
+                //     //         item = await repositoryStops.insert(stop);
+                //     //     } else {
+                //     //         item = await repositoryStops.update(conditions, stop);
+                //     //
+                //     //     }
+                //     // }
+                //
+                // });
 
-                    }
-                });
 
                 // item.then(( out: any) => {
                 //     console.log(out);
@@ -85,6 +103,9 @@ export class RestService {
                 // });
 
 
+            }
+            for (let stop   of result.result.data.stops) {
+                await repositoryStops.save(stop);
             }
         });
     }

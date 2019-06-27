@@ -1,5 +1,6 @@
 import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn} from 'typeorm';
 import Trips from './Trips';
+import Stops from './Stops';
 
 @Entity()
 export default class Accounts extends BaseEntity {
@@ -24,6 +25,9 @@ export default class Accounts extends BaseEntity {
     @Column({nullable: true})
     valid: boolean;
 
-    @OneToMany((type) => Trips, (trip) => trip.accountId)
+    @OneToMany((type) => Trips, (trip) => trip.account)
     trips: Trips[];
+
+    @OneToMany((type) => Stops, (stop) => stop.account)
+    stops: Stops[];
 }

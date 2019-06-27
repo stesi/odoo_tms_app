@@ -14,7 +14,9 @@ const routes: Routes = [
   },
   { path: 'accounts', loadChildren: './accounts/accounts.module#AccountsPageModule' },
   { path: 'create-account', loadChildren: './create-account/create-account.module#CreateAccountPageModule' },
-  { path: 'trips', loadChildren: './trips/trips.module#TripsPageModule' }
+  { path: 'trips', loadChildren: './trips/trips.module#TripsPageModule' },
+  { path: 'trip-view/:accountId/:externalId', loadChildren: './trip-view/trip-view.module#TripViewPageModule' }
+
 ];
 
 @NgModule({

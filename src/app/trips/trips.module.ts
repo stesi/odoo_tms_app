@@ -6,9 +6,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {TripsPage} from './trips.page';
-import {ExpandableComponent} from '../components/expandable/expandable.component';
-import {AccordionComponent} from '../components/accordion/accordion.component';
-import {AccordionGroupComponent} from '../components/accordion/accordion-group.component';
+import {AccordionModule} from '../components/accordion/accordion.module';
+
 
 const routes: Routes = [
     {
@@ -21,11 +20,11 @@ const routes: Routes = [
     imports: [
         CommonModule,
         FormsModule,
+        AccordionModule,
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [
-        AccordionComponent, AccordionGroupComponent, TripsPage]
+    declarations: [ TripsPage]
 })
 export class TripsPageModule {
 }

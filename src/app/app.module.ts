@@ -9,15 +9,17 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
+import {AccordionComponent} from './components/accordion/accordion.component';
+import {AccordionGroupComponent} from './components/accordion/accordion-group.component';
 
 @NgModule({
-    declarations: [AppComponent, ],
+    declarations: [AppComponent ],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     exports: [],
     providers: [
