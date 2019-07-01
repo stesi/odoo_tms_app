@@ -11,6 +11,7 @@ import {Utils} from '../services/utils';
 import {DataProvider} from '../services/DataProvider';
 import Trips from '../entities/Trips';
 import Stops from '../entities/Stops';
+import Settings from '../entities/Settings';
 
 @Component({
     selector: 'app-root',
@@ -60,7 +61,8 @@ export class AppComponent {
                 entities: [
                     Trips,
                     Accounts,
-                    Stops
+                    Stops,
+                    Settings
 
                 ],
             });

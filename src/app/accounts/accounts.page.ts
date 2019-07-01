@@ -29,9 +29,6 @@ export class AccountsPage implements OnInit {
         this.restClient.syncAccount(id);
     }
 
-    //(dblclick)="dblClickAccount(account.id)"
-
-
     dblClickAccount(id) {
         getConnection()
             .getRepository(Accounts)

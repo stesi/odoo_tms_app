@@ -13,18 +13,22 @@
 <ion-content>
   <form  (ngSubmit)="submitCreate()">
     <ion-item>
-      <ion-label>Nome</ion-label>
+      <ion-label>Nome account</ion-label>
+      <ion-input  type="text" [(ngModel)]="account.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Username</ion-label>
       <ion-input  type="text" [(ngModel)]="account.username" name="username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description</ion-label>
+      <ion-label>Password</ion-label>
       <ion-input  type="password" [(ngModel)]="account.password" name="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>URL</ion-label>
       <ion-input  type="text" [(ngModel)]="account.url" name="url"></ion-input>
     </ion-item>
-    <ion-button color="primary" type="submit"expand="full">Salva</ion-button>
+    <ion-button color="primary" type="submit" expand="full">Salva</ion-button>
 
   </form>
 </ion-content>

@@ -2,52 +2,46 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {getConnection} from 'typeorm';
 import Accounts from '../entities/Accounts';
+import {BehaviorSubject, from, Observable, Subject} from 'rxjs';
+import Settings from '../entities/Settings';
 
 
 @Injectable()
 export class DataProvider {
-    private activeAccount = ''
+    public activeAccount = new BehaviorSubject<number>(0);
+    public activeAccount$ = this.activeAccount.asObservable();
+    private connection;
+
     constructor() {
+        this.connection = getConnection();
+        const conditions = {name: 'activeAccount'};
+        const activeAccount = this.connection.getRepository(Settings).findOne(conditions).then((out: any) => {
+            let value = -1;
+            console.log(value);
+            if (out !== undefined) {
+                if (out.IntegerValue > 0) {
+                    value = out.IntegerValue;
+                }
+            }
+            this.activeAccount.next(value);
+        });
+
+
     }
 
-    public getAccounts(): Promise<any> {
-        return getConnection()
+    public updateCurrentAccount(newVal: number) {
+
+        this.connection.getRepository(Settings).save({name: 'activeAccount', IntegerValue: newVal});
+        this.activeAccount.next(newVal);
+    }
+
+
+    public getAccounts(): Observable<any> {
+        return from(getConnection()
             .getRepository(Accounts)
             .createQueryBuilder('accounts')
-            .getMany();
+            .getMany());
     }
 
-    // async syncAccount(id: number) {
-    //     await getConnection()
-    //         .getRepository(Accounts)
-    //         .createQueryBuilder('accounts')
-    //         .where('id= :id', {id: id})
-    //         .getOne().then((result: any) => {
-    //             this.syncData(result.url, result.accessToken);
-    //         });
-    //
-    // }
-    //
-    // public syncData(url: string, accessToken: string) {
-    //     return this.doCall(url, '/gtms/get', {}, accessToken).then((result: any) => {
-    //         console.log(result);
-    //     });
-    // }
-    //
-    // public getToken(url: string, login: string, password: string): Promise<any> {
-    //     return this.doCall(url, '/api/auth/token', {login: login, password: password});
-    //
-    //
-    // }
-    //
-    // public doCall(url: string, route: string, params: object = {}, accessToken = ''): Promise<any> {
-    //     let headers = new HttpHeaders({
-    //         'Content-Type': 'application/json',
-    //         'access-token': accessToken
-    //     });
-    //     return this.http.post(url + route, {params: params}, {headers: headers})
-    //         .toPromise();
-    //
-    //
-    // }
+
 }
