@@ -47,4 +47,6 @@ export default class Trips extends BaseEntity {
     @ManyToOne((type) => Accounts, (account) => account.trips )
     @JoinColumn({name: 'accountId'})
     account: Accounts;
+
+    
 }

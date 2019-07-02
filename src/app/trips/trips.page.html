@@ -8,12 +8,15 @@
             Trips
         </ion-title>
         <ion-item slot="end" id="page-select1" text-wrap>
-<ion-label></ion-label>
-            <ion-select  text-wrap *ngIf="(dataProvider.activeAccount$ | async) as activeAccountId" (ionChange)="selectAccount($event)" name="">
-                <ion-select-option value="-1" [selected]="activeAccountId === -1">
+            <ion-label></ion-label>
+            <ion-select [value]="activeAccountId" style=" max-width: 100% !important;"
+                        *ngIf="(dataProvider.activeAccount$ | async) as activeAccountId"
+                        (ionChange)="selectAccount($event)">
+                <ion-select-option value="-1">
                     Tutti
                 </ion-select-option>
-                <ion-select-option  [selected]="activeAccountId === account.id" value="{{account.id}}" *ngFor="let account of accounts$ | async">
+                <ion-select-option  value="{{account.id}}"
+                                   *ngFor="let account of accounts$ | async">
                     {{account.name}}
                 </ion-select-option>
 
@@ -21,7 +24,6 @@
         </ion-item>
     </ion-toolbar>
 </ion-header>
-
 <ion-content>
     <accordion>
         <group *ngFor="let trip of trips$ | async">
@@ -29,8 +31,8 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col size="2"><ion-icon name="car"></ion-icon></ion-col>
-                        <ion-col size="8">{{trip.name}} - {{trip.startDate | date:'dd/MM/yyyy' }}
-                            / Account {{trip.accountId}}</ion-col>
+                        <ion-col size="8"> {{trip.name}} - {{trip.startDate | date:'dd/MM/yyyy' }}
+                            / Account {{trip.accountId}} </ion-col>
                         <ion-col size="2">
                             <ion-button [routerLink]="['/trip-view/', trip.accountId ,trip.externalId]">
   <ion-icon slot="icon-only" name="send"></ion-icon>
@@ -45,7 +47,7 @@
              <ion-grid>
                     <ion-row>
                         <ion-col size="2">Type</ion-col>
-                        <ion-col size="10">{{trip.tripType}}</ion-col>
+                        <ion-col size="10">{{trip.tripType}} </ion-col>
                     </ion-row>
                      <ion-row>
                         <ion-col size="2">From</ion-col>

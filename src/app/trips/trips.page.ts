@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {from, Observable} from 'rxjs';
+import { Observable, from} from 'rxjs';
 import Accounts from '../../entities/Accounts';
 import {getConnection} from 'typeorm';
 import Trips from '../../entities/Trips';
@@ -15,6 +15,7 @@ export class TripsPage implements OnInit {
     public accounts$: Observable<Accounts[]>;
 
     constructor(private dataProvider: DataProvider) {
+    
     }
 
     // getAccounts(): Observable<Accounts[]> {
@@ -33,11 +34,12 @@ export class TripsPage implements OnInit {
     }
 
     getTrips(accountId) {
+        accountId = parseInt(accountId);
         if (accountId !== 0) {
             let query = getConnection()
                 .getRepository(Trips)
                 .createQueryBuilder('trips');
-
+            console.log(accountId);
             if (accountId !== -1) {
                 query = query.where({accountId: accountId});
             }
@@ -49,8 +51,8 @@ export class TripsPage implements OnInit {
     }
 
     selectAccount(element) {
-        console.log(element)
-        console.log(this.dataProvider.activeAccount.getValue())
+        console.log(element);
+        console.log(this.dataProvider.activeAccount.getValue());
         if (element.target.value !== this.dataProvider.activeAccount.getValue()) {
             this.dataProvider.updateCurrentAccount(element.target.value);
         }

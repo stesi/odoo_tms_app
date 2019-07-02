@@ -17,12 +17,13 @@ export class DataProvider {
         const conditions = {name: 'activeAccount'};
         const activeAccount = this.connection.getRepository(Settings).findOne(conditions).then((out: any) => {
             let value = -1;
-            console.log(value);
+
             if (out !== undefined) {
-                if (out.IntegerValue > 0) {
-                    value = out.IntegerValue;
-                }
+
+                value = out.IntegerValue;
+
             }
+            console.log(value);
             this.activeAccount.next(value);
         });
 

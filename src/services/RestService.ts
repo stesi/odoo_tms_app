@@ -5,6 +5,7 @@ import Accounts from '../entities/Accounts';
 import {forEach} from '@angular-devkit/schematics';
 import Trips from '../entities/Trips';
 import Stops from '../entities/Stops';
+import Operations from 'src/entities/Operations';
 
 
 @Injectable()
@@ -46,7 +47,17 @@ export class RestService {
         return this.doCall(accountId.url, '/gtms/get', {accountId: accountId.id}, accountId.accessToken).then(async (result: any) => {
             let repositoryTrips = connection.getRepository(Trips);
             let repositoryStops = connection.getRepository(Stops);
-            for (let trip   of result.result.data.trips) {
+            let repositoryOperations = connection.getRepository(Operations);
+            if (typeof result.result.data.trips !== undefined && result.result.data.trips.length > 0 ){
+                await repositoryTrips.save(result.result.data.trips);
+            }
+            if (typeof result.result.data.stops !== undefined && result.result.data.stops.length > 0 ){
+                await repositoryStops.save(result.result.data.stops);
+            }
+            if (typeof result.result.data.operations !== undefined && result.result.data.operations.length > 0 ){
+                await repositoryOperations.save(result.result.data.operations);
+            }
+           /*  for (let trip   of result.result.data.trips) {
                 var item: any;
                 await repositoryTrips.save(trip);
                 // trip.accountId.id = accountId.id;
@@ -103,10 +114,10 @@ export class RestService {
                 // });
 
 
-            }
-            for (let stop   of result.result.data.stops) {
+            } */
+           /*  for (let stop   of result.result.data.stops) {
                 await repositoryStops.save(stop);
-            }
+            } */
         });
     }
 
