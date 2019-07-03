@@ -38,9 +38,7 @@ export default class Trips extends BaseEntity {
     @Column({nullable: true})
     endDate: Date;
 
-    @OneToMany((type) => Stops, (stop) => stop.trip, {
-        eager: true
-    })
+    @OneToMany((type) => Stops, (stop) => stop.trip)
     stops: Stops[];
     @PrimaryColumn()
     accountId: number;

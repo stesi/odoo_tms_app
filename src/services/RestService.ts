@@ -6,6 +6,7 @@ import {forEach} from '@angular-devkit/schematics';
 import Trips from '../entities/Trips';
 import Stops from '../entities/Stops';
 import Operations from 'src/entities/Operations';
+import Loads from 'src/entities/Loads';
 
 
 @Injectable()
@@ -48,6 +49,7 @@ export class RestService {
             let repositoryTrips = connection.getRepository(Trips);
             let repositoryStops = connection.getRepository(Stops);
             let repositoryOperations = connection.getRepository(Operations);
+            let repositoryLoads = connection.getRepository(Loads);
             if (typeof result.result.data.trips !== undefined && result.result.data.trips.length > 0 ){
                 await repositoryTrips.save(result.result.data.trips);
             }
@@ -56,6 +58,9 @@ export class RestService {
             }
             if (typeof result.result.data.operations !== undefined && result.result.data.operations.length > 0 ){
                 await repositoryOperations.save(result.result.data.operations);
+            }
+            if (typeof result.result.data.loads !== undefined && result.result.data.loads.length > 0 ){
+                await repositoryLoads.save(result.result.data.loads);
             }
            /*  for (let trip   of result.result.data.trips) {
                 var item: any;
