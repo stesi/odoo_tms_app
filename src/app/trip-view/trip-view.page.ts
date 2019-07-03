@@ -25,7 +25,7 @@ export class TripViewPage implements OnInit {
     }
 
     getTrip(): Observable<Trips> {
-        return from(this.repositoryTrips.findOne({accountId: this.currentAccountId, externalId: this.currentTripId}) );
+        return from(this.repositoryTrips.findOne({accountId: this.currentAccountId, externalId: this.currentTripId},{'relations':['stops']}) );
     }
 
     ngOnInit() {

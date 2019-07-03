@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>stop_view</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="(stop$ | async) as currentStop">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">Name:</ion-col>
+          <ion-col size="9">{{currentStop.name}}</ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card>
+    <ion-card *ngIf="currentStop.loadOperations?.length > 0">
+      <ion-card-title>To load</ion-card-title>
+      <ion-list>
+        <ion-item *ngFor="let operation of currentStop.loadOperations">
+          <ion-list>
+            <ion-item *ngFor="let load of operation.Loads">
+              {{load.name}}
+
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+    <ion-card *ngIf="currentStop.unloadOperations?.length > 0">
+      <ion-card-title>To unload</ion-card-title>
+      <ion-list>
+        <ion-item *ngFor="let operation of currentStop.unloadOperations">
+          <ion-list>
+            <ion-item *ngFor="let load of operation.Loads">
+              {{load.name}}
+
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+  </div>
+
+</ion-content>

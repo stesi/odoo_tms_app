@@ -17,9 +17,11 @@
                         <ion-col size="2"><ion-icon name="car"></ion-icon></ion-col>
                         <ion-col size="8">{{stop.name}} - {{stop.arrivalPlannedAt | date:'dd/MM/yyyy' }}</ion-col>
                         <ion-col size="2">
-<!--                            <ion-button href="/trip-view/{{trip.accountId}}/{{trip.externalId}}">-->
-<!--  <ion-icon slot="icon-only" name="send"></ion-icon>-->
-<!--</ion-button>-->
+                            <ion-button [routerLink]="['/stop-view/', stop.accountId ,stop.externalId]">
+  <ion-icon slot="icon-only" name="send"></ion-icon>
+</ion-button>
+
+                            <!--                            /trip-view/{{trip.accountId}}/{{trip.externalId}}-->
                         </ion-col>
                     </ion-row>
                 </ion-grid>

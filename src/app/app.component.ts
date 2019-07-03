@@ -13,6 +13,7 @@ import Trips from '../entities/Trips';
 import Stops from '../entities/Stops';
 import Settings from '../entities/Settings';
 import Operations from 'src/entities/Operations';
+import Loads from 'src/entities/Loads';
 
 @Component({
     selector: 'app-root',
@@ -64,7 +65,8 @@ export class AppComponent {
                     Accounts,
                     Stops,
                     Settings,
-                    Operations
+                    Operations,
+                    Loads
 
                 ],
             });
