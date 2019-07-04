@@ -29,7 +29,7 @@ export class AccountsPage implements OnInit {
         this.restClient.syncAccount(id);
     }
 
-    dblClickAccount(id) {
+    deleteAccount(id) {
         getConnection()
             .getRepository(Accounts)
             .createQueryBuilder('accounts')

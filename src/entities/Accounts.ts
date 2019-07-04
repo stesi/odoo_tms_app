@@ -1,6 +1,7 @@
 import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn} from 'typeorm';
 import Trips from './Trips';
 import Stops from './Stops';
+import Events from './Events';
 
 @Entity()
 export default class Accounts extends BaseEntity {
@@ -14,6 +15,8 @@ export default class Accounts extends BaseEntity {
 
     @Column({nullable: true})
     password: string;
+    @Column()
+    userId: number;
 
     @Column({nullable: true})
     url: string;
@@ -31,4 +34,7 @@ export default class Accounts extends BaseEntity {
 
     @OneToMany((type) => Stops, (stop) => stop.account)
     stops: Stops[];
+
+    @OneToMany((type) => Events, (event) => event.account)
+    events: Events[];
 }

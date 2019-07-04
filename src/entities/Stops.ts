@@ -25,11 +25,17 @@ export default class Stops extends BaseEntity {
     @Column({nullable: true})
     departurePlannedAt: Date;
 
-    @ManyToOne((type) => Accounts, (account) => account.stops, {primary: true})
+    @Column({nullable: true})
+    arrivalExecutedAt: Date;
+
+    @Column({nullable: true})
+    departureExecutedAt: Date;
+
+    @ManyToOne((type) => Accounts, (account) => account.stops, {primary: true, onDelete:'CASCADE'})
     account: number;
 
 
-    @ManyToOne((type) => Trips)
+    @ManyToOne((type) => Trips,{ onDelete:'CASCADE'})
     @JoinColumn({name: 'tripExternalId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     trip: Trips;

@@ -14,6 +14,7 @@ import Stops from '../entities/Stops';
 import Settings from '../entities/Settings';
 import Operations from 'src/entities/Operations';
 import Loads from 'src/entities/Loads';
+import Events from 'src/entities/Events';
 
 @Component({
     selector: 'app-root',
@@ -59,17 +60,22 @@ export class AppComponent {
                 database: 'test',
                 location: 'default',
                 logging: ['error', 'query', 'schema'],
-                synchronize: true,
+                //synchronize: true,
                 entities: [
                     Trips,
                     Accounts,
                     Stops,
                     Settings,
                     Operations,
-                    Loads
+                    Loads,
+                    Events
 
                 ],
-            });
+            }).then(async (connection)=> {
+                await connection.query('PRAGMA foreign_keys=OFF');
+                await connection.synchronize();
+                await connection.query('PRAGMA foreign_keys=ON');
+             });
         });
 
 

@@ -16,7 +16,7 @@ export default class Loads extends BaseEntity {
     operationExternalId: number;
 
 
-    @ManyToOne((type) => Operations)
+    @ManyToOne((type) => Operations,{ onDelete:'CASCADE'})
     @JoinColumn({name: 'operationExternalId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     operation: Operations;

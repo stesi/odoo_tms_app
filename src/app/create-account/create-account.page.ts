@@ -19,18 +19,22 @@ export class CreateAccountPage implements OnInit {
     submitCreate() {
         let data = this.account;
         let token = false;
+        let userId=0;
         data.createDate = Date.now();
         this.restClient.getToken(data.url, data.username, data.password).then((result: any) => {
             let body = result.body;
                 if (typeof result.result === 'object') {
                     if (typeof result.result.access_token === 'string') {
                         token = result.result.access_token;
+                        userId = result.result.uid;
                     } else {
                         token = false;
+                        userId= 0;
                     }
                 }
                 if (token !== false) {
                     data.accessToken = token;
+                    data.userId = userId
                     getConnection()
                         .createQueryBuilder()
                         .insert()

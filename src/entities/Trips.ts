@@ -9,7 +9,8 @@ import {
     Index,
     OneToMany,
     Generated,
-    JoinColumn
+    JoinColumn,
+    CreateDateColumn
 } from 'typeorm';
 import Accounts from './Accounts';
 import Stops from './Stops';
@@ -40,9 +41,11 @@ export default class Trips extends BaseEntity {
 
     @OneToMany((type) => Stops, (stop) => stop.trip)
     stops: Stops[];
+    @CreateDateColumn()
+    createdAt:Date;
     @PrimaryColumn()
     accountId: number;
-    @ManyToOne((type) => Accounts, (account) => account.trips )
+    @ManyToOne((type) => Accounts, (account) => account.trips,{ onDelete:'CASCADE'} )
     @JoinColumn({name: 'accountId'})
     account: Accounts;
 

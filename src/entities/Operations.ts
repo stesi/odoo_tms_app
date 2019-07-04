@@ -26,18 +26,18 @@ export default class Operations extends BaseEntity {
     @OneToMany((type) => Loads, (load) => load.operation)
     Loads: Loads[];
 
-    @ManyToOne((type) => Stops)
+    @ManyToOne((type) => Stops,{ onDelete:'CASCADE'})
     @JoinColumn({name: 'stopLoadId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     stopLoad: Trips;
 
-    @ManyToOne((type) => Stops)
+    @ManyToOne((type) => Stops, { onDelete:'CASCADE'})
     @JoinColumn({name: 'stopUnloadId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     stopUnload: Trips;
 
 
-    @ManyToOne((type) => Trips)
+    @ManyToOne((type) => Trips, { onDelete:'CASCADE'})
     @JoinColumn({name: 'tripExternalId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     trip: Trips;
