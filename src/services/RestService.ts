@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { getConnection, Repository } from 'typeorm';
+import { getConnection, Repository, createQueryBuilder } from 'typeorm';
 import Accounts from '../entities/Accounts';
 import { forEach } from '@angular-devkit/schematics';
 import Trips from '../entities/Trips';
@@ -63,20 +63,22 @@ export class RestService {
         if (this.syncTaskRunning == false) {
             
             this.syncTaskRunning = true;
-            var eventsToSend = await  this.repositoryEvents.find();
-            var trips = await this.repositoryTrips.createQueryBuilder("trips").select(["externalId", "createdAt"]).getMany()
+           // var eventsToSend = await  this.repositoryEvents.find();
+            var eventsToSend = await this.repositoryTrips.createQueryBuilder("trips").innerJoinAndSelect("trips.events", "events").getMany()
+            //var trips = await this.repositoryTrips.createQueryBuilder("trips").select(["externalId", "createdAt"]).getMany()
+            console.log(eventsToSend)
             var params = { accountId: accountId.id, events: [] };
             if (eventsToSend.length > 0) {
                 params['events'] = eventsToSend;
-                params['trips'] = trips;
+              //  params['trips'] = trips;
             }
             return this.doCall(accountId.url, '/gtms/get', params, accountId.accessToken).then(async (result: any) => {
-                console.log(result)
+                
                 let managedEvents = result.result.data.managedEvents;
                 if (managedEvents.length > 0) {
                     await  this.repositoryEvents.delete(managedEvents);
                 }
-               
+                await this.repositoryTrips.createQueryBuilder('trips').delete().from(Trips).execute();
                 if (typeof result.result.data.trips !== undefined && result.result.data.trips.length > 0) {
                     await  this.repositoryTrips.save(result.result.data.trips);
                 }

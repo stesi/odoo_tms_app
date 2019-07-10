@@ -15,31 +15,36 @@
           <ion-col size="3">Name:</ion-col>
           <ion-col size="9">{{currentStop.name}}</ion-col>
         </ion-row>
-        <ion-row *ngIf="!currentStop.arrivalExecutedAt">
+        <ion-row *ngIf="currentStop.canArrive">
           <ion-col size="12">
 
-              <ion-button color="primary" expand='full' (click)="confirmArrival()">Confirm Arrival</ion-button>
-      
-       
+            <ion-button color="primary" expand='full' (click)="confirmArrival()">Confirm Arrival</ion-button>
+
+
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt">
-          <ion-col size="12">        
-          
-              <ion-button color="primary" expand='full'  (click)="confirmDeparture()">Confirm Departure</ion-button>
-            
+        <ion-row *ngIf="currentStop.canDepart">
+          <ion-col size="12">
+
+            <ion-button color="primary" expand='full' (click)="confirmDeparture()">Confirm Departure</ion-button>
+
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
     <ion-card *ngIf="currentStop.loadOperations?.length > 0">
       <ion-card-title>To load</ion-card-title>
+      <ion-button color="primary" *ngIf="currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt && currentStop.operationLoadToConfirm" expand='full' (click)="confirmOperations('LOAD')">Confirm Loads</ion-button>
       <ion-list>
+   
         <ion-item *ngFor="let operation of currentStop.loadOperations">
+            <ion-button color="primary" *ngIf="currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt && !operation.whenLoadExecutedAt " expand='full' (click)="confirmOperation(operation,'LOAD')">Confirm Operations</ion-button>
           <ion-list>
+        
             <ion-item *ngFor="let load of operation.Loads">
               {{load.name}}
-
+              <ion-button color="primary" expand='full' *ngIf="load.confirmed ==false && load.isMissing==false  && currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt && !operation.whenLoadExecutedAt"
+                (click)="confirmMissingPickup(load.externalId)">Missing</ion-button>
             </ion-item>
 
           </ion-list>
@@ -51,8 +56,11 @@
     </ion-card>
     <ion-card *ngIf="currentStop.unloadOperations?.length > 0">
       <ion-card-title>To unload</ion-card-title>
+      <ion-button color="primary" *ngIf="currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt && currentStop.operationUnloadToConfirm" expand='full' (click)="confirmOperations('UNLOAD')">Confirm Unloads</ion-button>
       <ion-list>
+      
         <ion-item *ngFor="let operation of currentStop.unloadOperations">
+            <ion-button color="primary" *ngIf="currentStop.arrivalExecutedAt && !currentStop.departureExecutedAt && !operation.whenUnloadExecutedAt" expand='full' (click)="confirmOperation(operation,'UNLOAD')">Confirm Operations</ion-button>
           <ion-list>
             <ion-item *ngFor="let load of operation.Loads">
               {{load.name}}

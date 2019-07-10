@@ -22,6 +22,8 @@ export default class Events extends BaseEntity {
     @Column({nullable:true})
     stopExternalId: number;
 
+    @Column({nullable:true})
+    operationExternalId: number;
     @ManyToOne((type) => Accounts, (account) => account.events,{ onDelete:'CASCADE'} )
     @JoinColumn({name: 'accountId'})
     account: Accounts;

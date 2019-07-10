@@ -14,6 +14,7 @@ import {
 } from 'typeorm';
 import Accounts from './Accounts';
 import Stops from './Stops';
+import Events from './Events';
 
 @Entity()
 @Index(['externalId', 'accountId'], {unique: true})
@@ -38,7 +39,9 @@ export default class Trips extends BaseEntity {
     startDate: Date;
     @Column({nullable: true})
     endDate: Date;
-
+    @OneToMany((type) => Events, (event) => event.trip)
+   
+    events: Events[];
     @OneToMany((type) => Stops, (stop) => stop.trip)
     stops: Stops[];
     @CreateDateColumn()

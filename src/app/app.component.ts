@@ -1,25 +1,26 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import 'reflect-metadata';
-import {Platform} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {createConnection} from 'typeorm';
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { createConnection } from 'typeorm';
 import Accounts from '../entities/Accounts';
-import {RestService} from '../services/RestService';
-import {HttpClientModule} from '@angular/common/http';
-import {Utils} from '../services/utils';
-import {DataProvider} from '../services/DataProvider';
+import { RestService } from '../services/RestService';
+import { HttpClientModule } from '@angular/common/http';
+import { Utils } from '../services/utils';
+import { DataProvider } from '../services/DataProvider';
 import Trips from '../entities/Trips';
 import Stops from '../entities/Stops';
 import Settings from '../entities/Settings';
 import Operations from 'src/entities/Operations';
 import Loads from 'src/entities/Loads';
 import Events from 'src/entities/Events';
+import { EventService } from 'src/services/EventService';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
-    providers: [RestService, HttpClientModule, Utils, DataProvider]
+    providers: [RestService, HttpClientModule, Utils, DataProvider, EventService]
 })
 export class AppComponent {
     public appPages = [
@@ -60,6 +61,7 @@ export class AppComponent {
                 database: 'test',
                 location: 'default',
                 logging: ['error', 'query', 'schema'],
+                subscribers: [],
                 //synchronize: true,
                 entities: [
                     Trips,
@@ -71,11 +73,11 @@ export class AppComponent {
                     Events
 
                 ],
-            }).then(async (connection)=> {
+            }).then(async (connection) => {
                 await connection.query('PRAGMA foreign_keys=OFF');
                 await connection.synchronize();
                 await connection.query('PRAGMA foreign_keys=ON');
-             });
+            });
         });
 
 

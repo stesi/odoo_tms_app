@@ -15,10 +15,17 @@ export default class Loads extends BaseEntity {
     @Column()
     operationExternalId: number;
 
+    @Column({ default:false})
+    confirmed: boolean;
+
+    @Column({default:false})
+    isMissing: boolean;
+
 
     @ManyToOne((type) => Operations,{ onDelete:'CASCADE'})
     @JoinColumn({name: 'operationExternalId', referencedColumnName: 'externalId'})
     @JoinColumn({name: 'accountId', referencedColumnName: 'accountId'})
     operation: Operations;
+    
 
 }
