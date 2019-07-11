@@ -1,8 +1,10 @@
-import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Index} from 'typeorm';
 
 import Operations from './Operations';
 
 @Entity()
+@Index(['externalId', 'accountId'])
+@Index(['operationExternalId', 'accountId'])
 export default class Loads extends BaseEntity {
     @PrimaryColumn()
     externalId: number;

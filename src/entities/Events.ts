@@ -1,9 +1,12 @@
-import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryColumn, OneToMany, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Index} from 'typeorm';
 import Accounts from './Accounts';
 import Trips from './Trips';
 import Stops from './Stops';
 
 @Entity()
+@Index(['accountId', 'tripExternalId'])
+@Index(['accountId', 'stopExternalId'])
+@Index(['accountId', 'operationExternalId'])
 export default class Events extends BaseEntity {
 
     @PrimaryGeneratedColumn()

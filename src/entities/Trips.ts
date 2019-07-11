@@ -17,7 +17,7 @@ import Stops from './Stops';
 import Events from './Events';
 
 @Entity()
-@Index(['externalId', 'accountId'], {unique: true})
+@Index(['externalId', 'accountId'])
 export default class Trips extends BaseEntity {
 
 
@@ -40,9 +40,10 @@ export default class Trips extends BaseEntity {
     startDate: Date;
     @Column({nullable: true})
     endDate: Date;
-    @OneToMany((type) => Events, (event) => event.trip)
-   
+    
+    @OneToMany((type) => Events, (event) => event.trip)   
     events: Events[];
+
     @OneToMany((type) => Stops, (stop) => stop.trip)
     stops: Stops[];
     @CreateDateColumn()

@@ -5,7 +5,8 @@ import Trips from './Trips';
 import Operations from './Operations';
 
 @Entity()
-@Index(['externalId', 'accountId'], { unique: true })
+@Index(['externalId', 'accountId'])
+@Index(['tripExternalId', 'accountId'])
 export default class Stops extends BaseEntity {
 
 
