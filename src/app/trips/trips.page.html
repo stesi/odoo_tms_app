@@ -31,7 +31,7 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col size="2"><ion-icon name="car"></ion-icon></ion-col>
-                        <ion-col size="8"> {{trip.name}} - {{trip.startDate | date:'dd/MM/yyyy' }}
+                        <ion-col size="8"> {{trip.name}} - {{trip.startDate | date:'dd/MM/yyyy H:mm:ss a z' }}
                             / Account {{trip.accountId}} </ion-col>
                         <ion-col size="2">
                             <ion-button [routerLink]="['/trip-view/', trip.accountId ,trip.externalId]">

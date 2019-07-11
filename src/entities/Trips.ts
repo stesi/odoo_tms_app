@@ -30,7 +30,7 @@ export default class Trips extends BaseEntity {
 
     @Column({nullable: true})
     tripType: string;
-    @Column({nullable: true})
+    @Column({nullable: true, })
     whenControlTimestamp:Date;
     @Column({nullable: true})
     fromAddress: string;
@@ -40,7 +40,7 @@ export default class Trips extends BaseEntity {
     startDate: Date;
     @Column({nullable: true})
     endDate: Date;
-    
+
     @OneToMany((type) => Events, (event) => event.trip)   
     events: Events[];
 
