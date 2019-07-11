@@ -30,7 +30,8 @@ export default class Trips extends BaseEntity {
 
     @Column({nullable: true})
     tripType: string;
-
+    @Column({nullable: true})
+    whenControlTimestamp:Date;
     @Column({nullable: true})
     fromAddress: string;
     @Column({nullable: true})
