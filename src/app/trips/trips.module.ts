@@ -7,7 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {TripsPage} from './trips.page';
 import {AccordionModule} from '../components/accordion/accordion.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
     {
@@ -22,9 +22,11 @@ const routes: Routes = [
         FormsModule,
         AccordionModule,
         IonicModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        FontAwesomeModule
     ],
     declarations: [ TripsPage]
 })
 export class TripsPageModule {
+   
 }

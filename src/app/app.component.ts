@@ -16,13 +16,14 @@ import Operations from 'src/entities/Operations';
 import Loads from 'src/entities/Loads';
 import Events from 'src/entities/Events';
 import { EventService } from 'src/services/EventService';
-
+import {faTruck} from '@fortawesome/free-solid-svg-icons';
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     providers: [RestService, HttpClientModule, Utils, DataProvider, EventService]
 })
 export class AppComponent {
+    faTruck = faTruck;
     public appPages = [
         {
             title: 'Home',

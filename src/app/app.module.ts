@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AccordionComponent} from './components/accordion/accordion.component';
 import {AccordionGroupComponent} from './components/accordion/accordion-group.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [AppComponent ],
@@ -20,6 +21,7 @@ import {AccordionGroupComponent} from './components/accordion/accordion-group.co
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
+        FontAwesomeModule
     ],
     exports: [],
     providers: [

@@ -4,7 +4,7 @@ import Accounts from '../../entities/Accounts';
 import {getConnection} from 'typeorm';
 import Trips from '../../entities/Trips';
 import {DataProvider} from '../../services/DataProvider';
-
+import {faTruck} from '@fortawesome/free-solid-svg-icons';
 @Component({
     selector: 'app-trips',
     templateUrl: './trips.page.html',
@@ -13,7 +13,7 @@ import {DataProvider} from '../../services/DataProvider';
 export class TripsPage implements OnInit {
     public trips$: Observable<Trips[]>;
     public accounts$: Observable<Accounts[]>;
-
+    faTruck = faTruck;
     constructor(private dataProvider: DataProvider) {
     
     }

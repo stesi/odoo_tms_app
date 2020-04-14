@@ -5,7 +5,7 @@ import Trips from '../../entities/Trips';
 import Stops from '../../entities/Stops';
 import {getConnection, Repository} from 'typeorm';
 import Accounts from '../../entities/Accounts';
-
+import { faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 @Component({
     selector: 'app-trip-view',
     templateUrl: './trip-view.page.html',
@@ -16,7 +16,7 @@ export class TripViewPage implements OnInit {
     private currentAccountId: number;
     private currentTripId: number;
     private repositoryTrips: Repository<Trips>;
-
+    faMapMarkerAlt = faMapMarkerAlt
     constructor(private route: ActivatedRoute,
                 private router: Router) {
         this.currentAccountId = parseInt(this.route.snapshot.paramMap.get('accountId'))
